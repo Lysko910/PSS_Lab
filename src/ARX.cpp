@@ -1,21 +1,7 @@
-﻿#include "ARX.h"
+﻿#include "../include/ARX.h"
 
-//konstruktor bezargumentowy
-ARX::ARX()
-	:m_B({}), m_A({}), m_k(0), m_var(0.0)
-{
-	this->m_dA = m_A.size();
-	this->m_dB = m_B.size();
-
-	std::deque<double> dU(this->m_dB + this->m_k, 0.0);
-	this->m_U = dU;
-	std::deque<double> dY(this->m_dA, 0.0);
-	this->m_Y = dY;
-
-	//std::cout << "ARX object constructed" << std::endl;
-}
-//konstruktor z inicjalizacj�
-ARX::ARX(std::vector<double> n_A = {}, std::vector<double> n_B = {}, unsigned int n_k, double n_var)
+//konstruktor 
+ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k , double n_var)
 	:m_B(n_B), m_A(n_A), m_k(n_k), m_var(n_var)
 {
 	this->m_dA = n_A.size();
@@ -26,7 +12,6 @@ ARX::ARX(std::vector<double> n_A = {}, std::vector<double> n_B = {}, unsigned in
 	std::deque<double> dY(this->m_dA, 0.0);
 	this->m_Y = dY;
 
-	//std::cout << "ARX object constructed" << std::endl;
 }
 //konstruktor kopiuj�cy
 ARX::ARX(const ARX& n_arx)

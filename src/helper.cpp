@@ -4,7 +4,7 @@
 #include <string>
 
 template <typename T>
-void plotToFile(std::vector<T> V1, std::string f_name = "C:\\Users\\michal\\Desktop\\PSS\\Lab\\results.txt") {
+void plotToFile(std::vector<T> V1, std::string f_name = "../results.txt") {
     std::ofstream myfile;
     myfile.open(f_name);
     for (auto x : V1) {
@@ -15,7 +15,7 @@ void plotToFile(std::vector<T> V1, std::string f_name = "C:\\Users\\michal\\Desk
 };
 
 template <typename T>
-void plotToFile(std::vector<T> V1, std::vector<T> V2, std::string f_name = "C:\\Users\\michal\\Desktop\\PSS\\Lab\\results.txt") {
+void plotToFile(std::vector<T> V1, std::vector<T> V2, std::string f_name = "../results.txt") {
     std::ofstream myfile;
     myfile.open(f_name);
     int n = V1.size() < V2.size() ? V2.size() : V1.size();
@@ -41,7 +41,7 @@ void plotToFile(std::vector<T> V1, std::vector<T> V2, std::string f_name = "C:\\
 
 
 template <typename T>
-void plotToFile(std::vector<T> V1, std::vector<T> V2, std::vector<T> V3, std::string f_name = "C:\\Users\\michal\\Desktop\\PSS\\Lab\\results.txt") {
+void plotToFile(std::vector<T> V1, std::vector<T> V2, std::vector<T> V3, std::string f_name = "../results.txt") {
     std::ofstream myfile;
     myfile.open(f_name);
     int n = V1.size() < V2.size() ? V2.size() : V1.size();

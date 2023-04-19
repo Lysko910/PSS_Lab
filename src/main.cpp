@@ -1,14 +1,15 @@
 ﻿
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 #include "helper.cpp"
-#include "ARX.h"
+#include "../include/ARX.h"
 
 using std::cout;
 using std::cin;
 using std::endl;
 
-#define DEBUG  // ustaw na MAIN aby skompilowa� program docelowy / ustaw na DEBUG aby skompilowa� program testujacy 
+#define MAIN  // ustaw na MAIN aby skompilowa� program docelowy / ustaw na DEBUG aby skompilowa� program testujacy 
 
 #ifdef DEBUG
 
@@ -201,6 +202,7 @@ int main() {
 	/* Deklaracja obiektu
 	A = [1, -0.5],	B = [1]	k =1	var = 0.0
 	*/
+	ARX arx3;
 	ARX arx({ -0.5 }, { 1 }, 1);
 	std::cout << arx << endl;
 	//test konstruktor kopiujacy

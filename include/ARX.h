@@ -4,22 +4,21 @@
 #include <vector>
 #include <string>
 #include <functional>
-#include <iostream>
 #include <numeric>
 #include <algorithm>
+#include <deque>
 
 class ARX :
     public SISO
 {
 public:
-    ARX();
-    ARX(std::vector<double> n_A, std::vector<double> n_B, unsigned int n_k = 0, double n_var = 0.0);
+    ARX(std::vector<double> n_A ={}, std::vector<double> n_B={}, unsigned int n_k = 0, double n_var = 0.0);
     ARX(const ARX& n_arx);
     ~ARX();
     ARX& operator=(const ARX& n_arx);
     friend std::ostream& operator<<(std::ostream& ss, const ARX& n_arx);
 
-    double symuluj(double n_Ui);
+    double symuluj(double n_Ui) override;
     //get "inline"
     std::vector<double> get_A() const
     {
@@ -85,6 +84,8 @@ private:
     unsigned int m_dB;
     unsigned int m_dA;
     double m_var;
+    std::deque<double> m_U;
+	std::deque<double> m_Y;
 
 };
 
