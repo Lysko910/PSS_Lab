@@ -1,4 +1,4 @@
-﻿#include "../include/ARX.h"
+﻿#include "ARX.h"
 
 //konstruktor 
 ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k , double n_var)
@@ -71,7 +71,7 @@ std::ostream& operator<<(std::ostream& ss, const ARX& n_arx)
 		"dA = " << n_A.size() << " dB = " << n_B.size()
 		<< " k = " << n_arx.get_k() << " var(e) = " << n_arx.get_var() << "\n"
 		<< "wielomian A: [ " << stringA << " ] " << "\n"
-		<< " wielomian B: [ " << stringB << " ] " << std::endl;
+		<< "wielomian B: [ " << stringB << " ] " << std::endl;
 
 	return ss;
 }
@@ -106,5 +106,110 @@ double ARX::symuluj(double n_Ui)
 	return n_Yi;
 }
 
+void ARX::writeConfig(){
+//usawienie danych do wpisania
+std::map<std::string, std::string> config = {
+    {"A", vecorToString(this->get_A())},
+    {"B", vecorToString(this->get_B())},
+    {"k", std::to_string(this->get_k())},
+    {"var_e", std::to_string(this->get_var())}};
 
+	std::vector<std::string> help_saver;
+    std::string line;
+	bool found = false;
+	bool save = false;
+// otwarcie pliku w celu wyczyszczenia 
+	std::fstream file("config.ini", std::ios::in | std::ios::out);
+    if (file) {
+    
+        while (std::getline(file, line)) {
+            //poszukiwanie odpowiedniego miejsca
+			if (line == "[ARX]") {
+                found = true;
+            } else if (found && line.find("=") != std::string::npos) {
+				//czyszczenie sekcji
+                file.seekp(-line.length()-1, std::ios::cur); 
+                file << std::string(line.length(), ' '); 
+            }else if (found && line.find("[") != std::string::npos){
+				save = true;
+			}
+			if(save && !line.empty())
+				help_saver.push_back(line);
+        }
+		file.close();
+    } else {
+        std::cerr << "Error: could not open file 'config.ini' for reading" << std::endl;
+    }
 
+//otwarcie pliku do zapisania danych
+	std::fstream file2("config.ini", std::ios::in | std::ios::out);
+	if (file2) {
+		if (found) { // zmiana sekcji istniejacej
+			// przejscie do poczatku sekcji
+				while (std::getline(file2, line)) {
+					if (line == "[ARX]") {
+					break;
+					}
+				}
+			// wpisanie danych
+				for (const auto& entry : config) {
+				file2 << entry.first << "=" << entry.second << std::endl;
+				}
+				file2 << std::endl;
+				for (const auto& string_help : help_saver) {
+				file2 << string_help <<std::endl;
+				}
+
+		} else { // zapisn nowych danych na koncu pliku
+			// Append new data
+			file2.clear();
+			file2.seekp(0, std::ios::end);
+			file2 << "[ARX]" << std::endl;
+				for (const auto& entry : config) {
+				file2 << entry.first << "=" << entry.second << std::endl;
+				}
+		}
+	
+		file2.close();
+	} else {
+        std::cerr << "Error: could not open file 'config.ini' for reading" << std::endl;
+    }
+}
+
+void ARX::readConfig(){
+	std::map<std::string, std::string> config;
+    std::ifstream file("config.ini");
+    if (file)
+    {	bool found = false;
+        std::string line;
+        while (std::getline(file, line))
+        {	if (line == "[ARX]") {
+            found = true;
+            continue;
+			}
+		size_t pos = line.find("[");
+		if((pos != std::string::npos)&& found){
+			break;
+		}	
+		if(found){
+            std::istringstream iss(line);
+            std::string key, value;
+            if (std::getline(std::getline(iss, key, '='), value))
+            {
+                config[key] = value;
+            }
+        }
+		}
+    }
+    else
+    {
+        std::cerr << "Error: could not open file 'config.ini' for reading" << std::endl;
+    }
+	std::string temp = config.at("A"); 
+	this->set_A(this->stringToVector<double>(config.at("A")));
+	this->set_B(this->stringToVector<double>(config.at("B")));
+	this->set_k(std::stoul(config.at("k")));
+	this->m_var=std::stod(config.at("var_e"));
+	
+	
+}

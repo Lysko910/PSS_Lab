@@ -3,6 +3,12 @@ cmake_minimum_required (VERSION 3.5)
 # name of project
 project(PSS_Lab)
 
+# boost library
+
+find_package( Boost REQUIRED COMPONENTS program_options )
+include_directories(${Boost_INCLUDE_DIRS})
+
+
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 14)
 
@@ -16,3 +22,4 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 # Add sub directories
 add_subdirectory(src)
 add_subdirectory(test)
+
