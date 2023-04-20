@@ -1,11 +1,7 @@
 ﻿
 #include <iostream>
-#include <fstream>
-#include <cmath>
 #include "helper.cpp"
 #include "../include/ARX.h"
-
-#include <map>
 
 using std::cout;
 using std::cin;
@@ -22,9 +18,15 @@ int main()
 	arx.set_A({1.2, 4.1});
 	arx.set_B({5.2, 2.0});
 	arx.set_k(2);
+	arx.set_var(4.0);
 	arx.writeConfig();
 	arx.readConfig();
 	cout<<arx<<endl;
+
+	arx.symuluj(0.0);
+	arx.symuluj(1.0);
+	arx.symuluj(1.0);
+	arx.symuluj(1.0);
 
     return 0;
 }

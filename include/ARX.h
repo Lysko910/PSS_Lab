@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <deque>
 #include <map>
+#include <random>
 
 class ARX :
     public SISO
@@ -23,8 +24,8 @@ public:
     friend std::ostream& operator<<(std::ostream& ss, const ARX& n_arx);
 
     double symuluj(double n_Ui) override;
-    virtual void writeConfig() override;
-	virtual void readConfig() override;
+    void writeConfig(std::string nazwa_config= "") override;
+	void readConfig(std::string nazwa_config= "") override;
 
     //get "inline"
     std::vector<double> get_A() const
@@ -81,6 +82,11 @@ public:
         std::deque<double> dU(this->m_dB + this->m_k, 0.0);
         this->m_U = dU;
     };
+     void set_var(double n_var)
+        //trzeba zmieni� m_U
+    {
+        this->m_var = n_var;
+    };
 
 private:
     template <typename T>
@@ -102,8 +108,8 @@ std::vector<T> stringToVector(const std::string& n_str) {
     return v;
 };
 
-
-
+    std::string m_nazwaObiektu;
+    static int m_liczbaObiektow;
     //wielomiany modelu ARX
     std::vector<double> m_A;
     std::vector<double> m_B;
@@ -116,4 +122,3 @@ std::vector<T> stringToVector(const std::string& n_str) {
 	std::deque<double> m_Y;
 
 };
-

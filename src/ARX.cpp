@@ -1,7 +1,8 @@
 ﻿#include "ARX.h"
 
+int ARX::m_liczbaObiektow = 0;
 //konstruktor 
-ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k , double n_var)
+ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k ,double n_var)
 	:m_B(n_B), m_A(n_A), m_k(n_k), m_var(n_var)
 {
 	this->m_dA = n_A.size();
@@ -11,7 +12,8 @@ ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k , 
 	this->m_U = dU;
 	std::deque<double> dY(this->m_dA, 0.0);
 	this->m_Y = dY;
-
+	++this->m_liczbaObiektow;
+	this->m_nazwaObiektu ="ARX_"+std::to_string(this->m_liczbaObiektow);
 }
 //konstruktor kopiuj�cy
 ARX::ARX(const ARX& n_arx)
@@ -26,11 +28,13 @@ ARX::ARX(const ARX& n_arx)
 	this->m_Y = n_arx.get_Y();
 	this->m_U = n_arx.get_U();
 	//std::cout << "ARX object copied" << std::endl;
+	++this->m_liczbaObiektow;
+	this->m_nazwaObiektu ="ARX_"+std::to_string(this->m_liczbaObiektow);
 }
 //destruktor
 ARX::~ARX()
-{
-
+{	
+	--this->m_liczbaObiektow;
 	//std::cout << "ARX object destructed" << std::endl;
 }
 // operator przypisania
@@ -48,7 +52,7 @@ ARX& ARX::operator=(const ARX& n_arx)
 		this->m_Y = n_arx.m_Y;
 		this->m_U = n_arx.m_U;
 		//std::cout << "ARX object assigned" << std::endl;
-
+		this->m_nazwaObiektu =n_arx.m_nazwaObiektu;
 	}
 	return *this;
 }
@@ -67,7 +71,7 @@ std::ostream& operator<<(std::ostream& ss, const ARX& n_arx)
 	std::for_each(n_B.begin(), n_B.end(), [&stringB](double value) {
 		stringB += std::to_string(value) + " ";
 		});
-	ss << "Model ARX:\n" <<
+	ss << n_arx.m_nazwaObiektu <<std::endl<<
 		"dA = " << n_A.size() << " dB = " << n_B.size()
 		<< " k = " << n_arx.get_k() << " var(e) = " << n_arx.get_var() << "\n"
 		<< "wielomian A: [ " << stringA << " ] " << "\n"
@@ -78,9 +82,9 @@ std::ostream& operator<<(std::ostream& ss, const ARX& n_arx)
 //funkcja symuluj�ca 1 krok modelu
 double ARX::symuluj(double n_Ui)
 {
-	;
-	// w przysz�osci b��d/zak��cenie
-	double n_ei = 0.0;
+	std::normal_distribution<double> noise{0.0,std::sqrt(std::fabs(this->m_var))};
+	std::default_random_engine silnik(std::random_device{}());
+	double n_ei = noise(silnik);
 
 	// sprawdzenie rozmiaru  
 	if (this->m_U.size() != this->m_dB + this->m_k ||
@@ -106,13 +110,17 @@ double ARX::symuluj(double n_Ui)
 	return n_Yi;
 }
 
-void ARX::writeConfig(){
+void ARX::writeConfig(std::string nazwa_config){
 //usawienie danych do wpisania
 std::map<std::string, std::string> config = {
     {"A", vecorToString(this->get_A())},
     {"B", vecorToString(this->get_B())},
     {"k", std::to_string(this->get_k())},
     {"var_e", std::to_string(this->get_var())}};
+	
+	if(nazwa_config.empty()) nazwa_config = this->m_nazwaObiektu; 
+
+	nazwa_config= "["+nazwa_config+"]";
 
 	std::vector<std::string> help_saver;
     std::string line;
@@ -124,7 +132,7 @@ std::map<std::string, std::string> config = {
     
         while (std::getline(file, line)) {
             //poszukiwanie odpowiedniego miejsca
-			if (line == "[ARX]") {
+			if (line == nazwa_config) {
                 found = true;
             } else if (found && line.find("=") != std::string::npos) {
 				//czyszczenie sekcji
@@ -147,7 +155,7 @@ std::map<std::string, std::string> config = {
 		if (found) { // zmiana sekcji istniejacej
 			// przejscie do poczatku sekcji
 				while (std::getline(file2, line)) {
-					if (line == "[ARX]") {
+					if (line == nazwa_config) {
 					break;
 					}
 				}
@@ -164,7 +172,7 @@ std::map<std::string, std::string> config = {
 			// Append new data
 			file2.clear();
 			file2.seekp(0, std::ios::end);
-			file2 << "[ARX]" << std::endl;
+			file2 << nazwa_config << std::endl;
 				for (const auto& entry : config) {
 				file2 << entry.first << "=" << entry.second << std::endl;
 				}
@@ -176,14 +184,19 @@ std::map<std::string, std::string> config = {
     }
 }
 
-void ARX::readConfig(){
+void ARX::readConfig(std::string nazwa_config){
 	std::map<std::string, std::string> config;
     std::ifstream file("config.ini");
+
+	if(nazwa_config.empty()) nazwa_config = this->m_nazwaObiektu; 
+
+	nazwa_config= "["+nazwa_config+"]";
+	
     if (file)
     {	bool found = false;
         std::string line;
         while (std::getline(file, line))
-        {	if (line == "[ARX]") {
+        {	if (line == nazwa_config) {
             found = true;
             continue;
 			}
