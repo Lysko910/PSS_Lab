@@ -1,7 +1,7 @@
 ﻿#include "ARX.h"
 
 int ARX::m_liczbaObiektow = 0;
-//konstruktor 
+
 ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k ,double n_var)
 	:m_B(n_B), m_A(n_A), m_k(n_k), m_var(n_var)
 {
