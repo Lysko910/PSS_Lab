@@ -211,16 +211,24 @@ private:
     std::string m_nazwaObiektu;
     // licznik obiektow klasy ARX
     static int m_liczbaObiektow;
+    /// probki sygnalu sterujacego
+    std::deque<double> m_U;
+    /// probki odpowiedzi modelu ARX
+	std::deque<double> m_Y;
     /** @name Parametry modelu ARX
     * @{
     */
+    /// Wektor parametrow A modelu ARX
     std::vector<double> m_A;
+    /// Wektor parametrow B modelu ARX
     std::vector<double> m_B;
+    /// opoznienie probek dyskretnych w modelu ARX
     unsigned int m_k;
+    /// Stopien Licznika modelu ARX
     unsigned int m_dB;
+    /// Stopie mianownika modelu ARX
     unsigned int m_dA;
+    /// wariancja szumu odpowiedzi modelu ARX
     double m_var;
-    std::deque<double> m_U;
-	std::deque<double> m_Y;
    /** @} */
 };
