@@ -1,7 +1,7 @@
 ﻿#include "ARX.h"
-
 int ARX::m_liczbaObiektow = 0;
 
+// konstruktor
 ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k ,double n_var)
 	:m_B(n_B), m_A(n_A), m_k(n_k), m_var(n_var)
 {
@@ -15,16 +15,16 @@ ARX::ARX(std::vector<double> n_A , std::vector<double> n_B , unsigned int n_k ,d
 	++this->m_liczbaObiektow;
 	this->m_nazwaObiektu ="ARX_"+std::to_string(this->m_liczbaObiektow);
 }
-//konstruktor kopiuj�cy
+//konstruktor kopiujacy
 ARX::ARX(const ARX& n_arx)
-{//przepisanie parametr�w 
+{//przepisanie parametrow 
 	this->m_A = n_arx.get_A();
 	this->m_B = n_arx.get_B();
-	//przepisanie parametr�w modelu
+	//przepisanie parametrow modelu
 	this->m_k = n_arx.get_k();
 	this->m_dA = this->m_A.size();
 	this->m_dB = this->m_A.size();
-	//przepisanie wielomian�w y,u ????
+	//przepisanie wielomianow y,u ????
 	this->m_Y = n_arx.get_Y();
 	this->m_U = n_arx.get_U();
 	//std::cout << "ARX object copied" << std::endl;
@@ -41,14 +41,14 @@ ARX::~ARX()
 ARX& ARX::operator=(const ARX& n_arx)
 {
 	if (this != &n_arx) {
-		//przepisanie parametr�w 
+		//przepisanie parametrow 
 		this->m_A = n_arx.m_A;
 		this->m_B = n_arx.m_B;
-		//przepisanie parametr�w modelu
+		//przepisanie parametrow modelu
 		this->m_k = n_arx.m_k;
 		this->m_dA = n_arx.m_dA;
 		this->m_dB = n_arx.m_dB;
-		//przepisanie wielomian�w y,u ????
+		//przepisanie wielomian0w y,u ????
 		this->m_Y = n_arx.m_Y;
 		this->m_U = n_arx.m_U;
 		//std::cout << "ARX object assigned" << std::endl;
@@ -79,9 +79,10 @@ std::ostream& operator<<(std::ostream& ss, const ARX& n_arx)
 
 	return ss;
 }
-//funkcja symuluj�ca 1 krok modelu
+//funkcja symulujoca 1 krok modelu
 double ARX::symuluj(double n_Ui)
-{
+{	
+	// generowanie zaklucen losowych o zadanym odchyleniu std. i sredniej "0"
 	std::normal_distribution<double> noise{0.0,std::sqrt(std::fabs(this->m_var))};
 	std::default_random_engine silnik(std::random_device{}());
 	double n_ei = noise(silnik);
@@ -99,7 +100,7 @@ double ARX::symuluj(double n_Ui)
 	std::vector<double> kB(this->m_k, 0.0);
 	kB.insert(kB.end(), this->m_B.begin(), this->m_B.end());
 
-	//r�wnanie r�nicowe
+	//rownanie roznicowe
 	double kBxU_part = std::inner_product(kB.begin(), kB.end(), this->m_U.begin(), 0.0);
 	double AxY_part = std::inner_product(this->m_A.begin(), this->m_A.end(), this->m_Y.begin(), 0.0);
 	double n_Yi = kBxU_part - AxY_part + n_ei;
@@ -110,18 +111,19 @@ double ARX::symuluj(double n_Ui)
 	return n_Yi;
 }
 
+// wpisywanie konfiguracji do pliku config.ini
 void ARX::writeConfig(std::string nazwa_config){
-//usawienie danych do wpisania
+//ustawienie danych do wpisania
 std::map<std::string, std::string> config = {
     {"A", vecorToString(this->get_A())},
     {"B", vecorToString(this->get_B())},
     {"k", std::to_string(this->get_k())},
     {"var_e", std::to_string(this->get_var())}};
-	
+
+// sprawdzenie nazwy i przypisanie odpowiedniej w razie zmiany
 	if(nazwa_config.empty()) nazwa_config = this->m_nazwaObiektu; 
-
 	nazwa_config= "["+nazwa_config+"]";
-
+//zmienne pomocnicze 
 	std::vector<std::string> help_saver;
     std::string line;
 	bool found = false;
@@ -141,12 +143,13 @@ std::map<std::string, std::string> config = {
             }else if (found && line.find("[") != std::string::npos){
 				save = true;
 			}
+			// zapamietanie danych pod sekcja
 			if(save && !line.empty())
 				help_saver.push_back(line);
         }
 		file.close();
     } else {
-        std::cerr << "Error: could not open file 'config.ini' for reading" << std::endl;
+        std::cerr << "Could not open file 'config.ini'" << std::endl;
     }
 
 //otwarcie pliku do zapisania danych
@@ -163,13 +166,13 @@ std::map<std::string, std::string> config = {
 				for (const auto& entry : config) {
 				file2 << entry.first << "=" << entry.second << std::endl;
 				}
+			// wpisanie dancyh ponizej wprowadzonej sekcji	
 				file2 << std::endl;
 				for (const auto& string_help : help_saver) {
 				file2 << string_help <<std::endl;
 				}
 
 		} else { // zapisn nowych danych na koncu pliku
-			// Append new data
 			file2.clear();
 			file2.seekp(0, std::ios::end);
 			file2 << nazwa_config << std::endl;
@@ -180,21 +183,23 @@ std::map<std::string, std::string> config = {
 	
 		file2.close();
 	} else {
-        std::cerr << "Error: could not open file 'config.ini' for reading" << std::endl;
+        std::cerr << "Culd not open file 'config.ini'" << std::endl;
     }
 }
 
+// czytanie danych z pliku config.ini
 void ARX::readConfig(std::string nazwa_config){
 	std::map<std::string, std::string> config;
     std::ifstream file("config.ini");
 
+// sprawdzenie nazwy i przypisanie odpowiedniej w razie zmiany
 	if(nazwa_config.empty()) nazwa_config = this->m_nazwaObiektu; 
-
 	nazwa_config= "["+nazwa_config+"]";
 	
     if (file)
     {	bool found = false;
         std::string line;
+		// szukanie odpowiedniej sekcji
         while (std::getline(file, line))
         {	if (line == nazwa_config) {
             found = true;
@@ -204,6 +209,7 @@ void ARX::readConfig(std::string nazwa_config){
 		if((pos != std::string::npos)&& found){
 			break;
 		}	
+		// czytanie z sekcji
 		if(found){
             std::istringstream iss(line);
             std::string key, value;
@@ -212,17 +218,21 @@ void ARX::readConfig(std::string nazwa_config){
                 config[key] = value;
             }
         }
+		else{
+		// brak konfiguracji do odczytu
+			std::cout<<"Config not found !!!"<<std::endl;
+		}
 		}
     }
     else
     {
-        std::cerr << "Error: could not open file 'config.ini' for reading" << std::endl;
+        std::cerr << "Could not open file 'config.ini'" << std::endl;
     }
+	//przepisanie danych z konfiguracji do obiektu
 	std::string temp = config.at("A"); 
 	this->set_A(this->stringToVector<double>(config.at("A")));
 	this->set_B(this->stringToVector<double>(config.at("B")));
 	this->set_k(std::stoul(config.at("k")));
 	this->m_var=std::stod(config.at("var_e"));
-	
-	
+		
 }
