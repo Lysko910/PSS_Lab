@@ -1,17 +1,6 @@
 ﻿#pragma once
 #include "SISO.h"
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <sstream>
-#include <functional>
-#include <iterator>
-#include <numeric>
-#include <algorithm>
-#include <deque>
-#include <map>
-#include <random>
+
  /**
   * \class ARX
   * @brief Klasa modeulujca obiekty dyskretne o strukturze ARX

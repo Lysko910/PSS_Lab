@@ -1,5 +1,18 @@
 ﻿#pragma once
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <functional>
+#include <iterator>
+#include <numeric>
+#include <algorithm>
+#include <deque>
+#include <map>
+#include <random>
+
  /**
  * @brief Klasa interfejsowa dla obiektow typu SISO (Single Input Single Output)
  */
