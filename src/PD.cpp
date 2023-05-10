@@ -7,18 +7,24 @@ PD::PD( double n_w, double n_Kp, double n_Td, double n_dt)
 PD::~PD(){}
 
 double PD::proportional(double n_Ei){
+	// obliczenie czesci P
     return this->m_Kp * n_Ei; 
 }
 
 double PD::derivative(double n_Ei){
+	// obliczenie czesci D
 double Ud =  this->m_Td * (n_Ei - this->m_prev_E)/ this->m_dt  *  this->m_Kp ; 
+// aktualizacja ostatniej probki
 this->m_prev_E =n_Ei;
 return Ud;
 }
 
 double PD::symuluj(double n_Yi){
+	// obliczenie bledu 
     double Ei = this->m_w - n_Yi;
+	//obliczenie starowania
     double Ud = this->proportional(Ei)+this->derivative(Ei);
+	// ograniczenie sterowania 
     if(Ud > this->m_MAX){
         Ud = this->m_MAX;
     }else if(Ud < this->m_MIN){
@@ -102,7 +108,6 @@ std::map<std::string, std::string> config = {
     }
 }
 
-// TO DO
 void PD::readConfig(std::string nazwa_config){
 std::map<std::string, std::string> config;
     std::ifstream file("config.ini");

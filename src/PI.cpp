@@ -7,13 +7,14 @@ PI::PI( double n_w, double n_Kp, double n_Ti, double n_dt)
 PI::~PI(){}
 
 double PI::proportional(double n_Ei){
+	// obliczenie czesci P
     return this->m_Kp * n_Ei; 
 }
 
 double PI::integral(double n_Ei){
     this->suma_Ei += n_Ei;
     double Ui =( this->suma_Ei /this->m_Ti)* this->m_dt * this->m_Kp; 
-    // anti windup na czesci calkujacej
+    // anti windup na czesci calkujacej (wersja wstepna)
     if(Ui >this->m_MAX){
         Ui = this->m_MAX;
     }else if(Ui<this->m_MIN){
@@ -23,9 +24,12 @@ return Ui;
 }
 
 double PI::symuluj(double n_Yi){
+	// obliczenie bledu 
     double Ei = this->m_w - n_Yi;
+	//obliczenie starowania
     double Ui = this->proportional(Ei) + this->integral(Ei);
-    if(Ui  > this->m_MAX){
+	// ograniczenie sterowania 
+	if(Ui  > this->m_MAX){
        Ui  = this->m_MAX;
     }else if(Ui < this->m_MIN){
        Ui = this->m_MIN;

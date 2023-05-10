@@ -8,9 +8,12 @@ PID::~PID(){
 }
 
 double PID::symuluj(double n_Yi){
+	// obliczenie bledu 
     double Ei = PI::m_w - n_Yi;
+	// obliczanie sterowania 
     double U = PI::proportional(Ei) + PI::integral(Ei)+ PD::derivative(Ei);
-    if(U  > PI::m_MAX){
+    // ograniczenie sterowania 
+	if(U  > PI::m_MAX){
        U  = PI::m_MAX;
     }else if(U < PI::m_MIN){
        U = PI::m_MIN;

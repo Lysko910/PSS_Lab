@@ -41,6 +41,10 @@ public:
      * @return Odpowiedz obiektu dyskretnego
      */
     double symuluj(double n_Ui) override;
+     /**
+     * @brief wpisz konfiguracje do pliku config.ini
+     * @param nazwa_config
+     */
     void writeConfig(std::string nazwa_config= "") override;
 	void readConfig(std::string nazwa_config= "") override;
 
