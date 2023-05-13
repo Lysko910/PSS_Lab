@@ -230,8 +230,8 @@ void ARX::readConfig(std::string nazwa_config){
     }
 	//przepisanie danych z konfiguracji do obiektu
 	std::string temp = config.at("A"); 
-	this->set_A(this->stringToVector<double>(config.at("A")));
-	this->set_B(this->stringToVector<double>(config.at("B")));
+	this->set_A(stringToVector<double>(config.at("A")));
+	this->set_B(stringToVector<double>(config.at("B")));
 	this->set_k(std::stoul(config.at("k")));
 	this->m_var=std::stod(config.at("var_e"));
 		

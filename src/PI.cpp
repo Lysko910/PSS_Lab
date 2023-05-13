@@ -2,7 +2,7 @@
 
 
 PI::PI( double n_w, double n_Kp, double n_Ti, double n_dt)
-:m_Kp(n_Kp),m_Ti(n_Ti),m_dt(n_dt),m_w(n_w){}
+:m_Kp(abs(n_Kp)),m_Ti(abs(n_Ti)),m_dt(abs(n_dt)),m_w(n_w){}
 
 PI::~PI(){}
 

@@ -2,6 +2,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <numeric>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
 
 template <typename T>
 void plotToFile(std::vector<T> V1, std::string f_name = "results.txt") {
@@ -71,3 +75,28 @@ void plotToFile(std::vector<T> V1, std::vector<T> V2, std::vector<T> V3, std::st
     myfile.close();
     std::cout << "Data written to file!!" << std::endl;
 };
+
+
+/**
+     * @brief Funckja zmieniajaca wektor dowolnego typu na string
+     */
+    template <typename T>
+    std::string vecorToString(std::vector<T> n_v){
+        std::string result = std::accumulate(n_v.begin(), n_v.end(),std::string{},
+        [](const std::string& s, T d){return s.empty() ? std::to_string(d) : s + "," + std::to_string(d);});
+        return result;
+    };
+    /**
+     * @brief Funckja zmieniajaca string na wektor
+     */
+    template<typename T>
+    std::vector<T> stringToVector(const std::string& n_str) {
+        std::vector<T> v;
+        std::istringstream iss(n_str);
+        std::string token;
+        while (std::getline(iss, token, ',')) {
+            T value = std::stod(token);
+            v.push_back(value);
+        }
+        return v;
+    };
