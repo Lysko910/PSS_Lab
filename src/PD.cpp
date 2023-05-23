@@ -1,8 +1,8 @@
 #include "PD.h"
 
 
-PD::PD( double n_w, double n_Kp, double n_Td, double n_dt)
-:m_Kp(abs(n_Kp)),m_Td(abs(n_Td)),m_dt(abs(n_dt)),m_w(n_w){}
+PD::PD(  double n_Kp, double n_Td, double n_dt)
+:m_Kp(abs(n_Kp)),m_Td(abs(n_Td)),m_dt(abs(n_dt)){}
 
 PD::~PD(){}
 
@@ -19,11 +19,9 @@ this->m_prev_E =n_Ei;
 return Ud;
 }
 
-double PD::symuluj(double n_Yi){
-	// obliczenie bledu 
-    double Ei = this->m_w - n_Yi;
+double PD::symuluj(double n_Ei){
 	//obliczenie starowania
-    double Ud = this->proportional(Ei)+this->derivative(Ei);
+    double Ud = this->proportional(n_Ei)+this->derivative(n_Ei);
 	// ograniczenie sterowania 
     if(Ud > this->m_MAX){
         Ud = this->m_MAX;
@@ -38,8 +36,7 @@ void PD::writeConfig(std::string nazwa_config){
 std::map<std::string, std::string> config = {
     {"Kp", std::to_string(this->m_Kp)},
     {"Td", std::to_string(this->m_Td)},
-    {"dt", std::to_string(this->m_dt)},
-    {"w", std::to_string(this->m_w)}};
+    {"dt", std::to_string(this->m_dt)}};
 
 // sprawdzenie nazwy i przypisanie odpowiedniej w razie zmiany
 	if(nazwa_config.empty()) nazwa_config = "PD"; 
@@ -152,5 +149,4 @@ std::map<std::string, std::string> config;
 	this->m_Kp =  std::stoul(config.at("Kp"));
 	this->m_Td = std::stoul(config.at("Td"));
 	this->m_dt = std::stoul(config.at("dt"));
-	this->m_w = std::stoul(config.at("w"));
 }

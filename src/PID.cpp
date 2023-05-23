@@ -1,17 +1,15 @@
 
 #include "PID.h"
 
-PID::PID(double n_w ,double n_Kp ,double n_Ti ,double n_Td, double n_dt)
-:PI(n_w,n_Kp,n_Ti,n_dt),PD(n_w,n_Kp,n_Td,n_dt){}
+PID::PID(double n_Kp ,double n_Ti ,double n_Td, double n_dt)
+:PI(n_Kp,n_Ti,n_dt),PD(n_Kp,n_Td,n_dt){}
 
 PID::~PID(){
 }
 
-double PID::symuluj(double n_Yi){
-	// obliczenie bledu 
-    double Ei = PI::m_w - n_Yi;
+double PID::symuluj(double n_Ei){
 	// obliczanie sterowania 
-    double U = PI::proportional(Ei) + PI::integral(Ei)+ PD::derivative(Ei);
+    double U = PI::proportional(n_Ei) + PI::integral(n_Ei)+ PD::derivative(n_Ei);
     // ograniczenie sterowania 
 	if(U  > PI::m_MAX){
        U  = PI::m_MAX;
@@ -27,8 +25,7 @@ std::map<std::string, std::string> config = {
     {"Kp", std::to_string(PI::m_Kp)},
     {"Td", std::to_string(PD::m_Td)},
     {"Ti", std::to_string(PI::m_Ti)},
-    {"dt", std::to_string(PI::m_dt)},
-    {"w", std::to_string(PI::m_w)}};
+    {"dt", std::to_string(PI::m_dt)}};
 
 // sprawdzenie nazwy i przypisanie odpowiedniej w razie zmiany
 	if(nazwa_config.empty()) nazwa_config = "PID"; 
@@ -143,5 +140,4 @@ std::map<std::string, std::string> config;
 	PI::m_Ti = std::stoul(config.at("Ti"));
    PD::m_Td = std::stoul(config.at("Td"));
 	PI::m_dt = std::stoul(config.at("dt"));
-	PI::m_w = std::stoul(config.at("w"));
 }

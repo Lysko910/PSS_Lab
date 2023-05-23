@@ -1,8 +1,8 @@
 #include "PI.h"
 
 
-PI::PI( double n_w, double n_Kp, double n_Ti, double n_dt)
-:m_Kp(abs(n_Kp)),m_Ti(abs(n_Ti)),m_dt(abs(n_dt)),m_w(n_w){}
+PI::PI(double n_Kp, double n_Ti, double n_dt)
+:m_Kp(abs(n_Kp)),m_Ti(abs(n_Ti)),m_dt(abs(n_dt)){}
 
 PI::~PI(){}
 
@@ -23,11 +23,9 @@ double PI::integral(double n_Ei){
 return Ui;
 }
 
-double PI::symuluj(double n_Yi){
-	// obliczenie bledu 
-    double Ei = this->m_w - n_Yi;
+double PI::symuluj(double n_Ei){
 	//obliczenie starowania
-    double Ui = this->proportional(Ei) + this->integral(Ei);
+    double Ui = this->proportional(n_Ei) + this->integral(n_Ei);
 	// ograniczenie sterowania 
 	if(Ui  > this->m_MAX){
        Ui  = this->m_MAX;
@@ -42,8 +40,7 @@ void PI::writeConfig(std::string nazwa_config){
 std::map<std::string, std::string> config = {
     {"Kp", std::to_string(this->m_Kp)},
     {"Ti", std::to_string(this->m_Ti)},
-    {"dt", std::to_string(this->m_dt)},
-    {"w", std::to_string(this->m_w)}};
+    {"dt", std::to_string(this->m_dt)}};
 
 // sprawdzenie nazwy i przypisanie odpowiedniej w razie zmiany
 	if(nazwa_config.empty()) nazwa_config = "PI"; 
@@ -157,5 +154,4 @@ std::map<std::string, std::string> config;
 	this->m_Kp =  std::stoul(config.at("Kp"));
 	this->m_Ti = std::stoul(config.at("Ti"));
 	this->m_dt = std::stoul(config.at("dt"));
-	this->m_w = std::stoul(config.at("w"));
 }
