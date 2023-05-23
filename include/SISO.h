@@ -9,23 +9,19 @@
 #include <map>
 #include <random>
 #include "../src/helper.cpp"
+#include "../src/struktury.cpp"
+
 
  /**
  * @brief Klasa interfejsowa dla obiektow typu SISO (Single Input Single Output)
  */
 
-class SISO
+class SISO: public Komponent
 {
 public:
 
 	SISO(){};
 	virtual ~SISO(){};
-	 /**
-     * @brief Funkcja do jednokrokowej symulacji odpowiedzi obiektu dyksretnego
-	 * @param  n_U Wartosc wejsciowa na obiekt dyskretny
-     * @return Odpowiedz obiektu dyskretnego
-     */
-	virtual double symuluj(double n_U) = 0;
 	 /**
      * @brief Funkcja zapisujaca konfuguracje do pliku config.ini
 	 * @param  nazwa_config Nazwa pod jak konfiguracja ma zostac zapisana do pliku
