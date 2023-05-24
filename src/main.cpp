@@ -13,17 +13,23 @@ using std::endl;
 
 
 int main(void){	
-  Generator* g =new GeneratorConst(2.0);
-  //Generator* d1 = new DecoratorSinus(g,5,0.5);
-	Generator* d2 = new DecoratorProstokat(g,0);
-  //Generator* d3 = new DecoratorSzum(d2,0.2);
-  //Generator* d4 = new DecoratorDelay(d3,3);
-  //Generator* d5 = new DecoratorNasycenie(d4,1.3);
+  Generator* generator_const =new GeneratorConst(1.0);
 
+  Generator* generator_skok = new DecoratorDelay(generator_const,10);
+  
+  Komponent * objekt1 = new ARX({ -0.8, 0.4 }, { 1 }, 1, 0.0);
+  Komponent * objekt2 = new ARX({ -0.8, 0.4 }, { 1 }, 1, 0.0);
+  //Komponent * struktura1 = new StrukturaRownolegla();
+  Komponent * struktura1 = new StrukturaSzeregowa();
+  struktura1->dodaj(objekt1);
+  struktura1->dodaj(objekt2);
   for(int i=0;i<100;i++){
-  double val = d2->generuj();
+  double val = generator_skok->generuj();
+  val = struktura1->symuluj(val);
 	std::cout<<val<<std::endl;	
 	}
-	//plotToFile<double>(signal);
+	
+  delete generator_const;
+  delete generator_skok;
     return 0;
 }

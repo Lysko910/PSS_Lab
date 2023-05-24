@@ -1,4 +1,4 @@
-﻿#include "ARX.h"
+﻿#include "../include/ARX.h"
 int ARX::m_liczbaObiektow = 0;
 
 // konstruktor
@@ -34,7 +34,7 @@ ARX::ARX(const ARX& n_arx)
 //destruktor
 ARX::~ARX()
 {	
-	--this->m_liczbaObiektow;
+	this->m_liczbaObiektow;
 	//std::cout << "ARX object destructed" << std::endl;
 }
 // operator przypisania

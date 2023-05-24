@@ -1,91 +1,52 @@
-#pragma once
-#include "SISO.h"
-/**
- * Klasa bazowa dla struktur, jako interface dla objektow i kompozytow
- * 
- **/
-class Komponent{
-/**
- * @var Component
- **/
-protected:
-    Komponent * m_komponent_bazowy;
-    public:
-    /**
-         * @brief Konstruktor
-         */
-    Komponent(){};    
-    /**
-         * @brief Konstruktor
-         */
-    virtual ~Komponent(){};
-    /**
-         * \set m_komponet_bazowy
-         *
-         * Ustawia wartosci bazowego komponentu w strukturze 
-         *
-         * \param n_komponent_bazowy 
-         */
-    void setBazowy(Komponent * n_komponent_bazowy){
+#include "../include/struktury.h"
+
+// KOMPONENT
+    Komponent::Komponent(){}
+
+    Komponent::~Komponent(){}
+  
+    void Komponent::setBazowy(Komponent * n_komponent_bazowy){
         this->m_komponent_bazowy = n_komponent_bazowy;
     }
-    /**
-         * \get m_komponet_bazowy
-         *
-         * Wzwraca wskaznik na komponent bazowy
-         *
-         * \return *m_komponet_bazowy 
-         */
-    Komponent* getBazowy()const{
+    Komponent* Komponent::getBazowy()const{
         return this->m_komponent_bazowy;
     } 
-    /**
-         * @brief dodaj 
-         * dodje element do kompozytu
-         */
-    virtual void dodaj(Komponent * n_komponent){}
-    /**
-         * @brief usun
-         * usuwa element z kompozytu
-         */
-    virtual void usun(Komponent * n_komponent){}
-    /**
-         * @brief czyToKompozyt
-         * sprawdza czy obiekt jest kompozytem czy komponentem
-         */
-    virtual bool czyToKompozyt()const{
+    
+    void Komponent::dodaj(Komponent * n_komponent){}
+  
+    void Komponent::usun(Komponent * n_komponent){}
+    
+    bool Komponent::czyToKompozyt()const{
         return false;
     }
-     /**
-     * @brief Funkcja do jednokrokowej symulacji odpowiedzi obiektu dyksretnego
-	 * @param  n_U Wartosc wejsciowa na obiekt dyskretny
-     * @return Odpowiedz obiektu dyskretnego
-     */
-	virtual double symuluj(double n_U) = 0;
-
-};
-
-/**
- * Klasa Kompozyt, struktura mogaca zawierac wiele elementow
- **/
-class Kompozyt: public Komponent{
-    protected:
-    std::vector<Komponent* > m_komponenty_pochodne;
-
-    public:
-    void dodaj(Komponent * n_komponent)override{
+    // KOMPOZYT
+    void Kompozyt::dodaj(Komponent * n_komponent){
         this->m_komponenty_pochodne.push_back(n_komponent);
         n_komponent->setBazowy(this);
     }
 
-    void usun(Komponent * n_komponent)override{
-        this->m_komponenty_pochodne.pop_back(n_komponent);
+    void Kompozyt::usun(Komponent * n_komponent){
+        this->m_komponenty_pochodne.pop_back();
         n_komponent->setBazowy(nullptr);
 
     }
 
-    bool czyToKompozyt()const{
+    bool Kompozyt::czyToKompozyt()const{
         return true;
     }
 
-};
+    double StrukturaSzeregowa::symuluj(double n_U){
+        double result = n_U;
+        for ( Komponent *komp : this->m_komponenty_pochodne) {
+                    result = komp->symuluj(result);
+            }
+        return result;
+    }
+
+    double StrukturaRownolegla::symuluj(double n_U){
+        double result = 0;
+        for ( Komponent *komp : this->m_komponenty_pochodne) {
+                result += komp->symuluj(n_U);
+            }
+        return result;
+    }

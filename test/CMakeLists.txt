@@ -13,6 +13,8 @@ add_executable(
   arx_ut
   arx_ut.cpp
   ../src/ARX.cpp
+  ../src/SISO.cpp
+  ../src/struktury.cpp
 )
 target_link_libraries(
     arx_ut

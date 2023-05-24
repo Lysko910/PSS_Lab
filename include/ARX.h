@@ -1,11 +1,12 @@
 ﻿#pragma once
 #include "SISO.h"
 
+
  /**
   * \class ARX
   * @brief Klasa modeulujca obiekty dyskretne o strukturze ARX
   */
-
+class SISO;
 class ARX :
     public SISO
 {
