@@ -34,7 +34,7 @@
     bool Kompozyt::czyToKompozyt()const{
         return true;
     }
-
+    //Przekazywanie wartosci wyjsc obiektow
     double StrukturaSzeregowa::symuluj(double n_U){
         double result = n_U;
         for ( Komponent *komp : this->m_komponenty_pochodne) {
@@ -42,7 +42,7 @@
             }
         return result;
     }
-
+    //sumowanie wartosci wyjsc obiektow
     double StrukturaRownolegla::symuluj(double n_U){
         double result = 0;
         for ( Komponent *komp : this->m_komponenty_pochodne) {
