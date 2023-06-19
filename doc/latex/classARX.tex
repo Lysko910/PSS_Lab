@@ -1,0 +1,320 @@
+\hypertarget{classARX}{}\doxysection{Dokumentacja klasy ARX}
+\label{classARX}\index{ARX@{ARX}}
+
+
+Klasa modeulujca obiekty dyskretne o strukturze \mbox{\hyperlink{classARX}{ARX}}.  
+
+
+
+
+{\ttfamily \#include $<$ARX.\+h$>$}
+
+
+
+Diagram dziedziczenia dla ARX\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=119pt]{classARX__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Diagram współpracy dla ARX\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=119pt]{classARX__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classARX_ad4d66c5ef04fe94c6c0ed8c738e1247b}{ARX}} (std\+::vector$<$ double $>$ n\+\_\+A=\{1\}, std\+::vector$<$ double $>$ n\+\_\+B=\{0\}, unsigned int n\+\_\+k=0, double n\+\_\+var=0.\+0)
+\begin{DoxyCompactList}\small\item\em Konstruktor z parmetrami domniemanymi. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classARX_af65255fee7814738499a2edfa9fe81b2}\label{classARX_af65255fee7814738499a2edfa9fe81b2}} 
+\mbox{\hyperlink{classARX_af65255fee7814738499a2edfa9fe81b2}{ARX}} (const \mbox{\hyperlink{classARX}{ARX}} \&n\+\_\+arx)
+\begin{DoxyCompactList}\small\item\em Konstruktor kopiujacy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classARX_abbba12ab36a3f0a6536938b242271c9f}\label{classARX_abbba12ab36a3f0a6536938b242271c9f}} 
+\mbox{\hyperlink{classARX_abbba12ab36a3f0a6536938b242271c9f}{$\sim$\+ARX}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classARX_a921aa2d3f57f83057eb0bffa24bba95f}\label{classARX_a921aa2d3f57f83057eb0bffa24bba95f}} 
+\mbox{\hyperlink{classARX}{ARX}} \& \mbox{\hyperlink{classARX_a921aa2d3f57f83057eb0bffa24bba95f}{operator=}} (const \mbox{\hyperlink{classARX}{ARX}} \&n\+\_\+arx)
+\begin{DoxyCompactList}\small\item\em operator przypisania \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classARX_a0682e45afaf6d830917fc9147725c9d8}{symuluj}} (double n\+\_\+\+Ui) override
+\begin{DoxyCompactList}\small\item\em Funkcja do jednokrokowej symulacji odpowiedzi obiektu dyksretnego. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classARX_a5117687f0b0af6a179dc31d56f8eb6e7}{write\+Config}} (std\+::string nazwa\+\_\+config=\char`\"{}\char`\"{}) override
+\begin{DoxyCompactList}\small\item\em Funkcja zapisujaca konfuguracje do pliku config.\+ini. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classARX_af7ee81612b34440810a2a71185047543}{read\+Config}} (std\+::string nazwa\+\_\+config=\char`\"{}\char`\"{}) override
+\begin{DoxyCompactList}\small\item\em Funkcja odczytujaca konfuguracje z pliku config.\+ini. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ funkcje get()}\par
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{classARX_a852941735effbc697eab8af61546a577}{get\+\_\+A}} () const
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{classARX_ac3f1f4d007e88f44e0d30d58ffe15f2b}{get\+\_\+B}} () const
+\item 
+std\+::deque$<$ double $>$ \mbox{\hyperlink{classARX_a3db125d1eea8983855b36e9645f994ec}{get\+\_\+U}} () const
+\item 
+std\+::deque$<$ double $>$ \mbox{\hyperlink{classARX_abb34c0d35b9343f2d821f25387ab65cc}{get\+\_\+Y}} () const
+\item 
+unsigned int \mbox{\hyperlink{classARX_a7d6eda4b25c6c830e8a32969581b15e1}{get\+\_\+k}} () const
+\item 
+double \mbox{\hyperlink{classARX_ad6e6a885b7b109e27d77cb31733d81a6}{get\+\_\+var}} () const
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ funkcje set()}\par
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classARX_a2f0fd049e8ffbd0f20b643aa765d5035}{set\+\_\+A}} (std\+::vector$<$ double $>$ n\+\_\+A)
+\item 
+void \mbox{\hyperlink{classARX_ad151dd0e345e093fafc027cdd1cc4c51}{set\+\_\+B}} (std\+::vector$<$ double $>$ n\+\_\+B)
+\item 
+void \mbox{\hyperlink{classARX_a7ccc094c80d555079474e32fdb00c37f}{set\+\_\+k}} (unsigned int n\+\_\+k)
+\item 
+void \mbox{\hyperlink{classARX_a05111ebb64b8261d964b82d15384c23d}{set\+\_\+var}} (double n\+\_\+var)
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsection*{Przyjaciele}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classARX_adf4aa2f51fe2f68505203b9b5d4bb53c}\label{classARX_adf4aa2f51fe2f68505203b9b5d4bb53c}} 
+std\+::ostream \& \mbox{\hyperlink{classARX_adf4aa2f51fe2f68505203b9b5d4bb53c}{operator$<$$<$}} (std\+::ostream \&ss, const \mbox{\hyperlink{classARX}{ARX}} \&n\+\_\+arx)
+\begin{DoxyCompactList}\small\item\em operator$<$$<$ przesania do strumienia zwraca \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa modeulujca obiekty dyskretne o strukturze \mbox{\hyperlink{classARX}{ARX}}. 
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{classARX_ad4d66c5ef04fe94c6c0ed8c738e1247b}\label{classARX_ad4d66c5ef04fe94c6c0ed8c738e1247b}} 
+\index{ARX@{ARX}!ARX@{ARX}}
+\index{ARX@{ARX}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{ARX()}{ARX()}}
+{\footnotesize\ttfamily ARX\+::\+ARX (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{n\+\_\+A = {\ttfamily \{1\}},  }\item[{std\+::vector$<$ double $>$}]{n\+\_\+B = {\ttfamily \{0\}},  }\item[{unsigned int}]{n\+\_\+k = {\ttfamily 0},  }\item[{double}]{n\+\_\+var = {\ttfamily 0.0} }\end{DoxyParamCaption})}
+
+
+
+Konstruktor z parmetrami domniemanymi. 
+
+\begin{DoxySeeAlso}{Zobacz również}
+\mbox{\hyperlink{classARX}{ARX}}(std\+::vector$<$double$>$ n\+\_\+A =\{1\}, std\+::vector$<$double$>$ n\+\_\+B=\{0\}, unsigned int n\+\_\+k = 0, double n\+\_\+var = 0.\+0); 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parametry}
+{\em m\+\_\+A} & Wektor parametrow A modelu \mbox{\hyperlink{classARX}{ARX}} \\
+\hline
+{\em m\+\_\+B} & Wektor parametrow B modelu \mbox{\hyperlink{classARX}{ARX}} \\
+\hline
+{\em m\+\_\+k} & Opoznienie sygnau \\
+\hline
+{\em m\+\_\+var} & Wariancja sygnalu \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{classARX_a852941735effbc697eab8af61546a577}\label{classARX_a852941735effbc697eab8af61546a577}} 
+\index{ARX@{ARX}!get\_A@{get\_A}}
+\index{get\_A@{get\_A}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{get\_A()}{get\_A()}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ ARX\+::get\+\_\+A (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}get A
+
+pobiera wektor parametrow A modelu \mbox{\hyperlink{classARX}{ARX}}
+
+\begin{DoxyReturn}{Zwraca}
+Obecna wartosci parametrow A 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classARX_ac3f1f4d007e88f44e0d30d58ffe15f2b}\label{classARX_ac3f1f4d007e88f44e0d30d58ffe15f2b}} 
+\index{ARX@{ARX}!get\_B@{get\_B}}
+\index{get\_B@{get\_B}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{get\_B()}{get\_B()}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ ARX\+::get\+\_\+B (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}get B
+
+pobiera wektor parametrow B modelu \mbox{\hyperlink{classARX}{ARX}}
+
+\begin{DoxyReturn}{Zwraca}
+Obecna wartosci parametrow B 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classARX_a7d6eda4b25c6c830e8a32969581b15e1}\label{classARX_a7d6eda4b25c6c830e8a32969581b15e1}} 
+\index{ARX@{ARX}!get\_k@{get\_k}}
+\index{get\_k@{get\_k}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{get\_k()}{get\_k()}}
+{\footnotesize\ttfamily unsigned int ARX\+::get\+\_\+k (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}get k
+
+pobiera i zwarca wartosc opoznienia modelu
+
+\begin{DoxyReturn}{Zwraca}
+Obecne wartosci opoznienia k 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classARX_a3db125d1eea8983855b36e9645f994ec}\label{classARX_a3db125d1eea8983855b36e9645f994ec}} 
+\index{ARX@{ARX}!get\_U@{get\_U}}
+\index{get\_U@{get\_U}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{get\_U()}{get\_U()}}
+{\footnotesize\ttfamily std\+::deque$<$double$>$ ARX\+::get\+\_\+U (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}get U
+
+pobiera i zwarca wektor probek sterowania
+
+\begin{DoxyReturn}{Zwraca}
+Obecne wartosci wektora U 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classARX_ad6e6a885b7b109e27d77cb31733d81a6}\label{classARX_ad6e6a885b7b109e27d77cb31733d81a6}} 
+\index{ARX@{ARX}!get\_var@{get\_var}}
+\index{get\_var@{get\_var}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{get\_var()}{get\_var()}}
+{\footnotesize\ttfamily double ARX\+::get\+\_\+var (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}get var
+
+pobiera i zwarca wartosc variancji sygnalu modelu
+
+\begin{DoxyReturn}{Zwraca}
+Obecne wartosci wariancji sygnalu var 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classARX_abb34c0d35b9343f2d821f25387ab65cc}\label{classARX_abb34c0d35b9343f2d821f25387ab65cc}} 
+\index{ARX@{ARX}!get\_Y@{get\_Y}}
+\index{get\_Y@{get\_Y}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{get\_Y()}{get\_Y()}}
+{\footnotesize\ttfamily std\+::deque$<$double$>$ ARX\+::get\+\_\+Y (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}get Y
+
+pobiera i zwarca wektor probek Odpowiedzi obiektu
+
+\begin{DoxyReturn}{Zwraca}
+Obecne wartosci wektora Y 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classARX_af7ee81612b34440810a2a71185047543}\label{classARX_af7ee81612b34440810a2a71185047543}} 
+\index{ARX@{ARX}!readConfig@{readConfig}}
+\index{readConfig@{readConfig}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{readConfig()}{readConfig()}}
+{\footnotesize\ttfamily void ARX\+::read\+Config (\begin{DoxyParamCaption}\item[{std\+::string}]{nazwa\+\_\+config = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Funkcja odczytujaca konfuguracje z pliku config.\+ini. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em nazwa\+\_\+config} & Nazwa konfiguracji, do odczytu \\
+\hline
+\end{DoxyParams}
+
+
+Implementuje \mbox{\hyperlink{classSISO_a71ccadcc3501f01e0a85184ef75e8d20}{SISO}}.
+
+\mbox{\Hypertarget{classARX_a2f0fd049e8ffbd0f20b643aa765d5035}\label{classARX_a2f0fd049e8ffbd0f20b643aa765d5035}} 
+\index{ARX@{ARX}!set\_A@{set\_A}}
+\index{set\_A@{set\_A}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{set\_A()}{set\_A()}}
+{\footnotesize\ttfamily void ARX\+::set\+\_\+A (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{n\+\_\+A }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}set m\+\_\+A
+
+Ustawia wartosci wielomianu A
+
+
+\begin{DoxyParams}{Parametry}
+{\em n\+\_\+A} & Wielomian A modelu \mbox{\hyperlink{classARX}{ARX}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classARX_ad151dd0e345e093fafc027cdd1cc4c51}\label{classARX_ad151dd0e345e093fafc027cdd1cc4c51}} 
+\index{ARX@{ARX}!set\_B@{set\_B}}
+\index{set\_B@{set\_B}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{set\_B()}{set\_B()}}
+{\footnotesize\ttfamily void ARX\+::set\+\_\+B (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{n\+\_\+B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}set m\+\_\+B
+
+Ustawia wartosci wielomianu B
+
+
+\begin{DoxyParams}{Parametry}
+{\em n\+\_\+B} & Wielomian B modelu \mbox{\hyperlink{classARX}{ARX}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classARX_a7ccc094c80d555079474e32fdb00c37f}\label{classARX_a7ccc094c80d555079474e32fdb00c37f}} 
+\index{ARX@{ARX}!set\_k@{set\_k}}
+\index{set\_k@{set\_k}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{set\_k()}{set\_k()}}
+{\footnotesize\ttfamily void ARX\+::set\+\_\+k (\begin{DoxyParamCaption}\item[{unsigned int}]{n\+\_\+k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}set m\+\_\+k
+
+Ustawia wartosci opoznienia k
+
+
+\begin{DoxyParams}{Parametry}
+{\em n\+\_\+k} & opoznienie sygnau dyskretnego k \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classARX_a05111ebb64b8261d964b82d15384c23d}\label{classARX_a05111ebb64b8261d964b82d15384c23d}} 
+\index{ARX@{ARX}!set\_var@{set\_var}}
+\index{set\_var@{set\_var}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{set\_var()}{set\_var()}}
+{\footnotesize\ttfamily void ARX\+::set\+\_\+var (\begin{DoxyParamCaption}\item[{double}]{n\+\_\+var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}set m\+\_\+var
+
+Ustawia wartosci wariancji sygnalu dyskretnego
+
+
+\begin{DoxyParams}{Parametry}
+{\em n\+\_\+var} & wariancja sygnalu dyskretnego \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classARX_a0682e45afaf6d830917fc9147725c9d8}\label{classARX_a0682e45afaf6d830917fc9147725c9d8}} 
+\index{ARX@{ARX}!symuluj@{symuluj}}
+\index{symuluj@{symuluj}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{symuluj()}{symuluj()}}
+{\footnotesize\ttfamily double ARX\+::symuluj (\begin{DoxyParamCaption}\item[{double}]{n\+\_\+\+Ui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Funkcja do jednokrokowej symulacji odpowiedzi obiektu dyksretnego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em n\+\_\+U} & Wartosc wejsciowa na obiekt dyskretny \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Odpowiedz obiektu dyskretnego 
+\end{DoxyReturn}
+
+
+Implementuje \mbox{\hyperlink{classSISO_a45590b2e5338e3adc5ebc8904f22e8bc}{SISO}}.
+
+\mbox{\Hypertarget{classARX_a5117687f0b0af6a179dc31d56f8eb6e7}\label{classARX_a5117687f0b0af6a179dc31d56f8eb6e7}} 
+\index{ARX@{ARX}!writeConfig@{writeConfig}}
+\index{writeConfig@{writeConfig}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{writeConfig()}{writeConfig()}}
+{\footnotesize\ttfamily void ARX\+::write\+Config (\begin{DoxyParamCaption}\item[{std\+::string}]{nazwa\+\_\+config = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Funkcja zapisujaca konfuguracje do pliku config.\+ini. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em nazwa\+\_\+config} & Nazwa pod jak konfiguracja ma zostac zapisana do pliku \\
+\hline
+\end{DoxyParams}
+
+
+Implementuje \mbox{\hyperlink{classSISO_ad5d37ae441a9c0c61a4f1cf1ed72d899}{SISO}}.
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+include/ARX.\+h\item 
+src/ARX.\+cpp\end{DoxyCompactItemize}

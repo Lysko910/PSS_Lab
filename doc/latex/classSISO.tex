@@ -1,0 +1,100 @@
+\hypertarget{classSISO}{}\doxysection{Dokumentacja klasy SISO}
+\label{classSISO}\index{SISO@{SISO}}
+
+
+Klasa interfejsowa dla obiektow typu \mbox{\hyperlink{classSISO}{SISO}} (Single Input Single Output)  
+
+
+
+
+{\ttfamily \#include $<$SISO.\+h$>$}
+
+
+
+Diagram dziedziczenia dla SISO\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=119pt]{classSISO__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+virtual double \mbox{\hyperlink{classSISO_a45590b2e5338e3adc5ebc8904f22e8bc}{symuluj}} (double n\+\_\+U)=0
+\begin{DoxyCompactList}\small\item\em Funkcja do jednokrokowej symulacji odpowiedzi obiektu dyksretnego. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classSISO_ad5d37ae441a9c0c61a4f1cf1ed72d899}{write\+Config}} (std\+::string nazwa\+\_\+config=\char`\"{}\char`\"{})=0
+\begin{DoxyCompactList}\small\item\em Funkcja zapisujaca konfuguracje do pliku config.\+ini. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classSISO_a71ccadcc3501f01e0a85184ef75e8d20}{read\+Config}} (std\+::string nazwa\+\_\+config=\char`\"{}\char`\"{})=0
+\begin{DoxyCompactList}\small\item\em Funkcja odczytujaca konfuguracje z pliku config.\+ini. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa interfejsowa dla obiektow typu \mbox{\hyperlink{classSISO}{SISO}} (Single Input Single Output) 
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{classSISO_a71ccadcc3501f01e0a85184ef75e8d20}\label{classSISO_a71ccadcc3501f01e0a85184ef75e8d20}} 
+\index{SISO@{SISO}!readConfig@{readConfig}}
+\index{readConfig@{readConfig}!SISO@{SISO}}
+\doxysubsubsection{\texorpdfstring{readConfig()}{readConfig()}}
+{\footnotesize\ttfamily virtual void SISO\+::read\+Config (\begin{DoxyParamCaption}\item[{std\+::string}]{nazwa\+\_\+config = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Funkcja odczytujaca konfuguracje z pliku config.\+ini. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em nazwa\+\_\+config} & Nazwa konfiguracji, do odczytu \\
+\hline
+\end{DoxyParams}
+
+
+Implementowany w \mbox{\hyperlink{classARX_af7ee81612b34440810a2a71185047543}{ARX}}.
+
+\mbox{\Hypertarget{classSISO_a45590b2e5338e3adc5ebc8904f22e8bc}\label{classSISO_a45590b2e5338e3adc5ebc8904f22e8bc}} 
+\index{SISO@{SISO}!symuluj@{symuluj}}
+\index{symuluj@{symuluj}!SISO@{SISO}}
+\doxysubsubsection{\texorpdfstring{symuluj()}{symuluj()}}
+{\footnotesize\ttfamily virtual double SISO\+::symuluj (\begin{DoxyParamCaption}\item[{double}]{n\+\_\+U }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Funkcja do jednokrokowej symulacji odpowiedzi obiektu dyksretnego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em n\+\_\+U} & Wartosc wejsciowa na obiekt dyskretny \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Odpowiedz obiektu dyskretnego 
+\end{DoxyReturn}
+
+
+Implementowany w \mbox{\hyperlink{classARX_a0682e45afaf6d830917fc9147725c9d8}{ARX}}.
+
+\mbox{\Hypertarget{classSISO_ad5d37ae441a9c0c61a4f1cf1ed72d899}\label{classSISO_ad5d37ae441a9c0c61a4f1cf1ed72d899}} 
+\index{SISO@{SISO}!writeConfig@{writeConfig}}
+\index{writeConfig@{writeConfig}!SISO@{SISO}}
+\doxysubsubsection{\texorpdfstring{writeConfig()}{writeConfig()}}
+{\footnotesize\ttfamily virtual void SISO\+::write\+Config (\begin{DoxyParamCaption}\item[{std\+::string}]{nazwa\+\_\+config = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Funkcja zapisujaca konfuguracje do pliku config.\+ini. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em nazwa\+\_\+config} & Nazwa pod jak konfiguracja ma zostac zapisana do pliku \\
+\hline
+\end{DoxyParams}
+
+
+Implementowany w \mbox{\hyperlink{classARX_a5117687f0b0af6a179dc31d56f8eb6e7}{ARX}}.
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+include/SISO.\+h\end{DoxyCompactItemize}
